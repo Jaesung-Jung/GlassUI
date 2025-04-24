@@ -33,14 +33,18 @@ struct Room<Content: View>: View {
   }
 
   var body: some View {
-    AsyncImage(url: URL(string: "https://images.unsplash.com/photo-1560185013-ead8277ef8ea")) {
-      $0.image?.resizable()
-    }
-    .aspectRatio(contentMode: .fill)
-    .ignoresSafeArea()
-    .overlay {
-      content
-    }
+    Rectangle()
+      .fill(.background)
+      .overlay {
+        AsyncImage(url: URL(string: "https://images.unsplash.com/photo-1560185013-ead8277ef8ea")) {
+          $0.image?.resizable()
+        }
+        .aspectRatio(contentMode: .fill)
+        .ignoresSafeArea()
+      }
+      .overlay {
+        content
+      }
   }
 }
 
