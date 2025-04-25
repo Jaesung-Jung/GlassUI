@@ -1,5 +1,5 @@
 //
-//  RecessedMaterial.swift
+//  RecessedRectangle.swift
 //
 //  Copyright © 2025 Jaesung Jung. All rights reserved.
 //
@@ -23,16 +23,9 @@
 
 import SwiftUI
 
-/// A recessed-style visual material with customizable corner radius.
-///
-/// `RecessedMaterial` creates a inset appearance using blended overlays
-/// and soft strokes, simulating a sunken surface.
-public struct RecessedMaterial: View {
+public struct RecessedRectangle: View {
   let cornerRadius: CGFloat
 
-  /// Creates a `RecessedMaterial` with the specified corner radius.
-  ///
-  /// - Parameter cornerRadius: The radius applied to the material's rounded corners. Defaults to `0`.
   public init(cornerRadius: CGFloat = 0) {
     self.cornerRadius = cornerRadius
   }
@@ -74,7 +67,7 @@ public struct RecessedMaterial: View {
   }
 }
 
-// MARK: - RecessedMaterial Preview
+// MARK: - RecessedRectangle Preview
 
 #if DEBUG
 
@@ -84,7 +77,7 @@ public struct RecessedMaterial: View {
       .frame(width: 300, height: 300)
       .layoutPriority(1)
 
-    RecessedMaterial(cornerRadius: 20)
+    RecessedRectangle(cornerRadius: 20)
       .padding(10)
       .frame(height: 60)
   }
