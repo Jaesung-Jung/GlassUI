@@ -1,5 +1,5 @@
 //
-//  RecessedPlatter.swift
+//  RecessedMaterial.swift
 //
 //  Copyright © 2025 Jaesung Jung. All rights reserved.
 //
@@ -23,16 +23,16 @@
 
 import SwiftUI
 
-/// A recessed-style visual platter with customizable corner radius.
+/// A recessed-style visual material with customizable corner radius.
 ///
-/// `RecessedPlatter` creates a inset appearance using blended overlays
+/// `RecessedMaterial` creates a inset appearance using blended overlays
 /// and soft strokes, simulating a sunken surface.
-public struct RecessedPlatter: View {
+public struct RecessedMaterial: View {
   let cornerRadius: CGFloat
 
-  /// Creates a `RecessedPlatter` with the specified corner radius.
+  /// Creates a `RecessedMaterial` with the specified corner radius.
   ///
-  /// - Parameter cornerRadius: The radius applied to the platter's rounded corners. Defaults to `0`.
+  /// - Parameter cornerRadius: The radius applied to the material's rounded corners. Defaults to `0`.
   public init(cornerRadius: CGFloat = 0) {
     self.cornerRadius = cornerRadius
   }
@@ -47,34 +47,34 @@ public struct RecessedPlatter: View {
             $0.addRoundedRect(
               in: proxy.frame(in: .local)
                 .insetBy(dx: 0, dy: 0)
-                .offsetBy(dx: 1, dy: 1.5),
+                .offsetBy(dx: 0, dy: -1),
               cornerSize: CGSize(width: cornerRadius, height: cornerRadius),
               style: .circular
             )
           }
-          .stroke(.black.opacity(0.08), lineWidth: 3)
-          .blur(radius: 2)
-          .blendMode(.plusDarker)
+          .stroke(.white.opacity(0.3), lineWidth: 1)
+          .blur(radius: 0.5)
+          .blendMode(.plusLighter)
 
           Path {
             $0.addRoundedRect(
               in: proxy.frame(in: .local)
                 .insetBy(dx: 0, dy: 0)
-                .offsetBy(dx: 0, dy: -0.5),
+                .offsetBy(dx: 1, dy: 1.5),
               cornerSize: CGSize(width: cornerRadius, height: cornerRadius),
               style: .circular
             )
           }
-          .stroke(.white.opacity(0.3), lineWidth: 1.5)
-          .blur(radius: 1)
-          .blendMode(.plusLighter)
+          .stroke(.black.opacity(0.08), lineWidth: 1)
+          .blur(radius: 2)
+          .blendMode(.plusDarker)
         }
       }
       .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .circular))
   }
 }
 
-// MARK: - RecessedPlatter Preview
+// MARK: - RecessedMaterial Preview
 
 #if DEBUG
 
@@ -82,13 +82,11 @@ public struct RecessedPlatter: View {
   Room {
     GlassPlatter(cornerRadius: 30)
       .frame(width: 300, height: 300)
-      .overlay {
-        VStack {
-          RecessedPlatter(cornerRadius: 25)
-            .frame(height: 50)
-            .padding(.horizontal, 10)
-        }
-      }
+      .layoutPriority(1)
+
+    RecessedMaterial(cornerRadius: 20)
+      .padding(10)
+      .frame(height: 60)
   }
 }
 
